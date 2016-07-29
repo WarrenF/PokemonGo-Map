@@ -633,7 +633,7 @@ function setupScannedMarker(item) {
   var marker = new google.maps.Circle({
     map: map,
     center: circleCenter,
-    radius: 100, // 10 miles in metres
+    radius: 70, // 70 Meters
     fillColor: getColorByDate(item.last_modified),
     strokeWeight: 1
   });
@@ -1179,7 +1179,7 @@ $(function() {
       });
     }
   }, 1000);
-  
+
   //Wipe off/restore map icons when switches are toggled
   function buildSwitchChangeListener(data, data_type, storageKey) {
     return function () {

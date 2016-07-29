@@ -55,7 +55,7 @@ def send_map_request(api, position):
 def get_new_coords(init_loc, distance, bearing):
     """ Given an initial lat/lng, a distance(in kms), and a bearing (degrees),
     this will calculate the resulting lat/lng coordinates.
-    """ 
+    """
     R = 6378.1 #km radius of the earth
     bearing = math.radians(bearing)
 
@@ -76,13 +76,13 @@ def generate_location_steps(initial_loc, step_count):
     SOUTH = 180
     WEST = 270
 
-    pulse_radius = 0.1                  # km - radius of players heartbeat is 100m
+    pulse_radius = 0.07                 # km - radius of players heartbeat is 100m
     xdist = math.sqrt(3)*pulse_radius   # dist between column centers
     ydist = 3*(pulse_radius/2)          # dist between row centers
 
     yield (initial_loc[0], initial_loc[1], 0) #insert initial location
 
-    ring = 1            
+    ring = 1
     loc = initial_loc
     while ring < step_count:
         #Set loc to start at top left
