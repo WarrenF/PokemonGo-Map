@@ -12,9 +12,6 @@ var idToPokemon = {};
 var excludedPokemon = [];
 var notifiedPokemon = [];
 
-var serverDownCount = 0;
-var serverDownAmount = 2;
-
 var map;
 var rawDataIsLoading = false;
 var locationMarker;
@@ -336,6 +333,7 @@ function initSidebar() {
   $('#pokestops-switch').prop('checked', Store.get('showPokestops'));
   $('#lured-pokestops-only-switch').val(Store.get('showLuredPokestopsOnly'));
   $('#lured-pokestops-only-wrapper').toggle(Store.get('showPokestops'));
+  $('#geoloc-switch').prop('checked', Store.get('geoLocate'));
   $('#scanned-switch').prop('checked', Store.get('showScanned'));
   $('#sound-switch').prop('checked', Store.get('playSound'));
 
@@ -749,18 +747,8 @@ function loadRawData() {
         rawDataIsLoading = true;
       }
     },
-    complete: function( result ) {
+    complete: function( ) {
       rawDataIsLoading = false;
-
-      if ( result.pokemons.length === 0 && result.scanned.length === 0 ) {
-        serverDownCount++;
-        if ( serverDownCount > serverDownAmount ) {
-          $( '#serverDown' ).show( );
-        }
-      } else {
-        serverDownCount = 0;
-        $( '#serverDown' ).hide( );
-      }
     }
   })
 }
@@ -1234,4 +1222,12 @@ $(function() {
     redrawPokemon(map_data.lure_pokemons);
   });
 
+  $('#geoloc-switch').change(function() {
+    $("#next-location").prop("disabled", this.checked);
+    $("#next-location").css("background-color", this.checked ? "#e0e0e0" : "#ffffff");
+    if (!navigator.geolocation)
+      this.checked = false;
+    else
+      Store.set('geoLocate', this.checked);
+  });
 });

@@ -12,9 +12,6 @@ var idToPokemon = {};
 var excludedPokemon = [];
 var notifiedPokemon = [];
 
-var serverDownCount = 0;
-var serverDownAmount = 2;
-
 var map;
 var rawDataIsLoading = false;
 var locationMarker;
@@ -750,18 +747,8 @@ function loadRawData() {
         rawDataIsLoading = true;
       }
     },
-    complete: function( result ) {
+    complete: function( ) {
       rawDataIsLoading = false;
-
-      if ( result.pokemons.length === 0 && result.scanned.length === 0 ) {
-        serverDownCount++;
-        if ( serverDownCount > serverDownAmount ) {
-          $( '#serverDown' ).show( );
-        }
-      } else {
-        serverDownCount = 0;
-        $( '#serverDown' ).hide( );
-      }
     }
   })
 }
