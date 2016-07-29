@@ -2,7 +2,7 @@
 <html lang="{{lang}}">
   <head>
     <meta charset="utf-8">
-    <title>Pokémon Go Map</title>
+    <title>Findamon</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black">
@@ -32,33 +32,15 @@
     <script src="static/js/vendor/modernizr.custom.js"></script>
   </head>
   <body id="top">
+    <div id="serverDown" style="display: none; color: red; font-size: 20px; text-align: center;">The pokemon api server appears to be down, please try again later!</div>
     <div class="wrapper">
       <!-- Header -->
       <header id="header">
         <a href="#nav">Options</a>
-        <h1><a href="#">Pokémon Go Map</a></h1>
+        <a style="color: lightgreen;font-weight: bold;" href="https://www.paypal.me/WarrenFitzpatrick" target="_blank">Please make a donation</a>
       </header>
       <!-- NAV -->
       <nav id="nav">
-        <div class="form-control switch-container" style="display:{{is_fixed}}" >
-          <label for="next-location">
-            <h3>Change your location</h3>
-            <input id="next-location" type="text" name="next-location" placeholder="Change your location">
-          </label>
-        </div>
-        <div class="form-control switch-container">
-          <h3>Follow location</h3>
-	  <div class="onoffswitch">
-	    <input id="geoloc-switch" type="checkbox" name="geoloc-switch" class="onoffswitch-checkbox" checked/>
-	    <label class="onoffswitch-label" for="geoloc-switch">
-	    <span class="switch-label" data-on="On" data-off="Off"></span>
-	    <span class="switch-handle"></span>
-	    </label>
-	  </div>
-	</div>
-
-	<hr width="100%">
-
         <p>Select markers to be visible on map.</p>
         <div class="form-control switch-container">
           <h3>Pokémon</h3>

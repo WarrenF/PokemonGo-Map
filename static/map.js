@@ -12,6 +12,9 @@ var idToPokemon = {};
 var excludedPokemon = [];
 var notifiedPokemon = [];
 
+var serverDownCount = 0;
+var serverDownAmount = 2;
+
 var map;
 var rawDataIsLoading = false;
 var locationMarker;
@@ -337,9 +340,9 @@ function initSidebar() {
   $('#scanned-switch').prop('checked', Store.get('showScanned'));
   $('#sound-switch').prop('checked', Store.get('playSound'));
 
-  var searchBox = new google.maps.places.SearchBox(document.getElementById('next-location'));
-  $("#next-location").css("background-color", $('#geoloc-switch').prop('checked') ? "#e0e0e0" : "#ffffff");
-
+  //var searchBox = new google.maps.places.SearchBox(document.getElementById('next-location'));
+  //$("#next-location").css("background-color", $('#geoloc-switch').prop('checked') ? "#e0e0e0" : "#ffffff");
+/*
   searchBox.addListener('places_changed', function() {
     var places = searchBox.getPlaces();
 
@@ -350,6 +353,7 @@ function initSidebar() {
     var loc = places[0].geometry.location;
     changeLocation(loc.lat(), loc.lng());
   });
+  */
 
   var icons = $('#pokemon-icons');
   $.each(pokemon_sprites, function(key, value) {
@@ -761,8 +765,18 @@ function loadRawData() {
         rawDataIsLoading = true;
       }
     },
-    complete: function() {
+    complete: function( result ) {
       rawDataIsLoading = false;
+
+      if ( result.pokemons.length === 0 && result.scanned.length === 0 ) {
+        serverDownCount++;
+        if ( serverDownCount > serverDownAmount ) {
+          $( '#serverDown' ).show( );
+        }
+      } else {
+        serverDownCount = 0;
+        $( '#serverDown' ).hide( );
+      }
     }
   })
 }
@@ -1179,7 +1193,7 @@ $(function() {
       });
     }
   }, 1000);
-  
+
   //Wipe off/restore map icons when switches are toggled
   function buildSwitchChangeListener(data, data_type, storageKey) {
     return function () {
