@@ -340,21 +340,6 @@ function initSidebar() {
   $('#scanned-switch').prop('checked', Store.get('showScanned'));
   $('#sound-switch').prop('checked', Store.get('playSound'));
 
-  //var searchBox = new google.maps.places.SearchBox(document.getElementById('next-location'));
-  //$("#next-location").css("background-color", $('#geoloc-switch').prop('checked') ? "#e0e0e0" : "#ffffff");
-/*
-  searchBox.addListener('places_changed', function() {
-    var places = searchBox.getPlaces();
-
-    if (places.length == 0) {
-      return;
-    }
-
-    var loc = places[0].geometry.location;
-    changeLocation(loc.lat(), loc.lng());
-  });
-  */
-
   var icons = $('#pokemon-icons');
   $.each(pokemon_sprites, function(key, value) {
     icons.append($('<option></option>').attr("value", key).text(value.name));
